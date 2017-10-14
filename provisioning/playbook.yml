@@ -1,0 +1,29 @@
+---
+- hosts: coral.dev
+  become: yes
+  become_method: sudo
+  become_user: root
+  vars_files:
+    - vars/main.yml
+  gather_facts: yes
+  roles:
+    - role: geerlingguy.firewall
+    - role: geerlingguy.ntp
+    - role: geerlingguy.mysql
+    - role: geerlingguy.apache
+    - role: geerlingguy.repo-remi
+      when: ansible_os_family == 'RedHat'
+    - role: geerlingguy.php-versions
+    - role: geerlingguy.php
+    - role: basic-setup
+  tasks:
+    - name: set selinux to permissive
+      command: setenforce 0
+    - name: permanently set selinux to permissive
+      command: sed -i -e 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+#    - name: set postfix to use ipv4
+#      command: sed -i -e 's/inet_protocols = all/inet_protocols = ipv4/g' /etc/postfix/main.cf
+
+
+
+

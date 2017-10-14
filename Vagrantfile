@@ -1,7 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "centos/7"
   config.vm.hostname = "coral"
@@ -21,10 +23,9 @@ Vagrant.configure("2") do |config|
   config.hostmanager.aliases = "#{config.vm.hostname}.dev"
 
   # main provisioner
-  config.vm.provision "ansible_local" do |ansible|
-    ansible.provisioning_path = '/vagrant/ansible'
-    ansible.playbook = 'development-playbook.yml'
-    ansible.inventory_path = 'hosts'
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = 'provisioning/playbook.yml'
+    ansible.inventory_path = "provisioning/inventory"
     ansible.limit = 'all'
   end
 end
