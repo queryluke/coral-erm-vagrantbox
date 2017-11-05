@@ -7,7 +7,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "centos/7"
   config.vm.hostname = "coral"
-  config.vm.synced_folder "./coral", "/coral", nfs: true
+  config.vm.synced_folder "./coral", "/coral",
+    id: "coral",
+    mount_options: ["dmode=775,fmode=664"]
+  config.vm.synced_folder "./provisioning", "/provisioning", id: "provisioning"
 
   config.ssh.forward_agent = "true"
 
@@ -23,9 +26,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.aliases = "#{config.vm.hostname}.dev"
 
   # main provisioner
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = 'provisioning/playbook.yml'
-    ansible.inventory_path = "provisioning/inventory"
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.provisioning_path = '/provisioning'
+    ansible.playbook = 'playbook.yml'
+    ansible.inventory_path = 'inventory'
+    ansible.galaxy_role_file = 'requirements.yml'
     ansible.limit = 'all'
   end
 end

@@ -15,14 +15,50 @@
       when: ansible_os_family == 'RedHat'
     - role: geerlingguy.php-versions
     - role: geerlingguy.php
-    - role: basic-setup
   tasks:
     - name: set selinux to permissive
       command: setenforce 0
     - name: permanently set selinux to permissive
       command: sed -i -e 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
-#    - name: set postfix to use ipv4
-#      command: sed -i -e 's/inet_protocols = all/inet_protocols = ipv4/g' /etc/postfix/main.cf
+    - name: set postfix to use ipv4
+      command: sed -i -e 's/inet_protocols = all/inet_protocols = ipv4/g' /etc/postfix/main.cf
+    - name: set vagrant as apache user
+      command: sed -i -e 's/User apache/User vagrant/g' /etc/httpd/conf/httpd.conf
+    - name: set vagrant as apache group
+      command: sed -i -e 's/Group apache/Group vagrant/g' /etc/httpd/conf/httpd.conf
+    - name: give vagrant permission to php session data
+      command: 'chown root:vagrant /var/lib/php/session'
+    - name: install additional packages
+      yum:
+        pkg: "{{item}}"
+        state: present
+        update_cache: yes
+      with_items:
+        - git-core
+        - curl
+        - zlib
+        - zlib-devel
+        - gcc-c++
+        - readline
+        - readline-devel
+        - libyaml-devel
+        - libffi-devel
+        - openssl-devel
+        - make
+        - bzip2
+        - autoconf
+        - automake
+        - libtool
+        - bison
+        - sqlite
+        - sqlite-devel
+        - libxml2-devel
+        - libxslt-devel
+        - libcurl-devel
+        - nodejs
+        - nano
+        - tree
+        - htop
 
 
 

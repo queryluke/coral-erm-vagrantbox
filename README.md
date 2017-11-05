@@ -8,12 +8,8 @@ Vagrant config for quickly setting up a CORAL dev environment
 3. Install the necessary Vagrant plugins
     * [Guest Additions](https://github.com/dotless-de/vagrant-vbguest) `vagrant plugin install vagrant-vbguest`
     * [Host Manager](https://github.com/devopsgroup-io/vagrant-hostmanager) `vagrant plugin install vagrant-hostmanager`
-3. Install [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html)
-    * On a mac, you can use homebrew `brew install ansible`
 4. Clone your fork of the [CORAL ERM](https://github.com/Coral-erm) repo into or unzip a release into `$PROJECT_ROOT`. It should be named `coral`
-6. Install the necessary Ansible roles for this profile: 
-    * `$ ansible-galaxy install -r $PROJECT_ROOT/requirements.yml`
-7. Create the VM:
+5. Create the VM:
     * `$ cd $PROJECT_ROOT; vagrant up`
     
 Install coral using the gui at http://coral.dev

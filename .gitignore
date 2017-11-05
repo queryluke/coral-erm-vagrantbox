@@ -1,3 +1,4 @@
 .vagrant
 coral/
 .idea
+provisioning/roles/*
