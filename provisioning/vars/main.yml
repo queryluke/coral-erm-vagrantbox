@@ -27,5 +27,6 @@ php_packages:
   - php-pear
   - php-mysql
   - php-opcache
+  - php-soap
 
 mysql_root_password: coralerm
