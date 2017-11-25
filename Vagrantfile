@@ -7,9 +7,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "centos/7"
   config.vm.hostname = "coral"
-  config.vm.synced_folder "./coral", "/coral",
-    id: "coral",
-    mount_options: ["dmode=775,fmode=664"]
   config.vm.synced_folder "./provisioning", "/provisioning", id: "provisioning"
 
   config.ssh.forward_agent = "true"
