@@ -59,6 +59,13 @@
         - nano
         - tree
         - htop
+    - name: create coral dir
+      file:
+        path: /coral
+        state: directory
+        mode: 0755
+        owner: vagrant
+        group: vagrant
 
 
 
