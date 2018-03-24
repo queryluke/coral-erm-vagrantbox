@@ -1,0 +1,17 @@
+---
+- name: clone coral
+  become_user: vagrant
+  command: "git clone {{ coral_repo }} {{ coral_dir }}"
+  when: clone_coral == true
+- name: checkout branch
+  become_user: vagrant
+  chdir: "{{ coral_dir }}"
+  command: "git checkout {{ coral_branch }}"
+  when: clone_coral == true
+- name: create coral dir
+  file:
+    path: "{{ coral_dir }}"
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant

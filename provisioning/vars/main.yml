@@ -1,16 +1,16 @@
 ---
 workspace: /root
-hostname: coral.dev
-project_name: coral
+hostname: "{{ project_name }}.localhost"
+project_name: "{{ project_name }}"
 ntp_timezone: America/New_York
 
 apache_vhosts_filename: "{{ project_name }}.conf"
 apache_vhosts:
-  - servername: "{{ project_name }}.dev"
-    documentroot: "/coral"
+  - servername: "{{ project_name }}.localhost"
+    documentroot: "{{ coral_dir }}"
 
 php_enablerepo: remi
-php_version: '7.1'
+php_version: "{{ php_version }}"
 php_memory_limit: "128M"
 php_max_execution_time: "90"
 php_upload_max_filesize: "256M"
@@ -28,5 +28,3 @@ php_packages:
   - php-mysql
   - php-opcache
   - php-soap
-
-mysql_root_password: coralerm

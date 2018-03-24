@@ -1,4 +1,3 @@
 .vagrant
-coral/
 .idea
-provisioning/roles/*
+vagrant_config

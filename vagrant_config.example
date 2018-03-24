@@ -1,0 +1,11 @@
+VAGRANTFILE_API_VERSION = '2'
+VM_BOX = 'centos/7'
+PRIVATE_NETWORK = '192.168.30.206'
+LOCALHOST_POST = 8788
+PREOJECT_NAME = 'coral-test'
+PHP_VERSION = '7.0'
+MYSQL_ROOT_PASSWORD = 'secret_password'
+CLONE_CORAL = false
+CORAL_REPO = 'https://github.com/coral-erm/coral.git'
+CORAL_BRANCH = 'master'
+CORAL_DIR = '/www/html'
