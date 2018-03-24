@@ -1,0 +1,12 @@
+---
+vagrantfile_api_version: '2'
+vm_box: 'centos/7'
+private_network: '192.168.30.205'
+localhost_port: 8777
+project_name: 'coral'
+php_version: '7.1'
+mysql_root_password: 'coralerm'
+clone_coral: true
+coral_repo: 'https://github.com/coral-erm/coral.git'
+coral_branch: 'master'
+coral_dir: '/coral'
