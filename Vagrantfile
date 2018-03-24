@@ -1,36 +1,36 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-VAGRANTFILE_API_VERSION = "2"
+require 'yaml'
+vc = YAML.load_file('./config.yml')
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure(vc['vagrantfile_api_version']) do |config|
 
-  config.vm.box = "centos/7"
-  config.vm.hostname = "coral"
-  config.vm.synced_folder "./coral", "/coral",
-    id: "coral",
-    mount_options: ["dmode=775,fmode=664"]
-  config.vm.synced_folder "./provisioning", "/provisioning", id: "provisioning"
+  config.vm.box = vc['vm_box']
+  config.vm.hostname = vc['project_name']
 
-  config.ssh.forward_agent = "true"
+  config.ssh.forward_agent = 'true'
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.30.205"
-
-  config.hostmanager.enabled = true
-  config.hostmanager.manage_host = true
-  config.hostmanager.manage_guest = true
-  config.hostmanager.ignore_private_ip = false
-  config.hostmanager.include_offline = true
-  config.hostmanager.aliases = "#{config.vm.hostname}.dev"
+  config.vm.network "private_network", ip: vc['private_network']
+  config.vm.network 'forwarded_port', guest: 80, host: vc['localhost_port']
 
   # main provisioner
   config.vm.provision "ansible_local" do |ansible|
-    ansible.provisioning_path = '/provisioning'
+    ansible.provisioning_path = '/vagrant/provisioning'
     ansible.playbook = 'playbook.yml'
     ansible.inventory_path = 'inventory'
     ansible.galaxy_role_file = 'requirements.yml'
     ansible.limit = 'all'
+    ansible.extra_vars = {
+      project_name: vc['project_name'],
+      php_version: vc['php_version'],
+      mysql_root_password: vc['mysql_root_password'],
+      coral_dir: vc['coral_dir'],
+      clone_coral: vc['clone_coral'],
+      coral_repo: vc['coral_repo'],
+      coral_branch: vc['coral_branch']
+    }
   end
 end
