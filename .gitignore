@@ -1,3 +1,3 @@
 .vagrant
 .idea
-vagrant_config
+config.yml
