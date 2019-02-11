@@ -13,7 +13,7 @@ Vagrant config for quickly setting up a CORAL dev environment
 3. (_OPTIONAL_): Edit the `config.yml` file
 4. `$ vagrant up`
     
-Install coral using the gui at http://coral.dev
+Install coral using the gui at http://localhost:8777 (or at the `localhost_port` in the config)
 Mysql user and password:
 * user=root
 * password=coralerm (_or the mysql_root_password you set in the config.yml file_)
