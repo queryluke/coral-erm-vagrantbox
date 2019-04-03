@@ -8,7 +8,7 @@ Vagrant config for quickly setting up a CORAL dev environment
 2. [Vagrant](https://www.vagrantup.com/downloads.html)
 
 ## Usage
-1. Move to the project root: `$ cd $PROJECT_ROOT; vagrant up`
+1. Move to the project root: `$ cd $PROJECT_ROOT`
 2. Create a vagrant config file: `$ cp config.yml.example config.yml`
 3. (_OPTIONAL_): Edit the `config.yml` file
 4. `$ vagrant up`
