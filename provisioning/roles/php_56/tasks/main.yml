@@ -1,0 +1,6 @@
+---
+- name: Enable remi
+  command: yum --enablerepo=remi,remi-php56 install -y php php-common
+
+- name: Install php 5.6 on Centos 7
+  command: yum --enablerepo=remi,remi-php56 install -y php-cli php-pear php-pdo php-mysql php-mysqlnd php-pgsql php-sqlite php-gd php-mbstring php-mcrypt php-xml php-simplexml php-curl php-zip

@@ -14,7 +14,11 @@
     - role: geerlingguy.repo-remi
       when: ansible_os_family == 'RedHat'
     - role: geerlingguy.php-versions
+      when: php_version != '5.6'
     - role: geerlingguy.php
+      when: php_version != '5.6'
+    - role: php_56
+      when: php_version == '5.6'
     - role: dev_tools
     - role: tool_server
     - role: setup_coral
